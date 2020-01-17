@@ -135,8 +135,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun checkForDownloadMenu() {
-        val booksList = appDatabase.localBooksDao().getDownloadedBooks(true)
-        downloadMenu?.isVisible = !booksList.isNullOrEmpty()
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

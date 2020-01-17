@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.jskaleel.fte.R
-import com.jskaleel.fte.database.entities.LocalBooks
+import com.jskaleel.fte.model.LocalBooks
 
 class BookListAdapter(
     private val mContext: Context,
@@ -40,13 +40,6 @@ class BookListAdapter(
             if (previousClickedPosition == holder.adapterPosition) {
                 return@setOnClickListener
             }
-            if (previousClickedPosition != -1) {
-                booksList[previousClickedPosition].isExpanded = false
-                notifyItemChanged(previousClickedPosition)
-            }
-            previousClickedPosition = holder.adapterPosition
-            val expanded = bookItem.isExpanded
-            bookItem.isExpanded = !expanded
             notifyItemChanged(holder.adapterPosition)
         }
     }

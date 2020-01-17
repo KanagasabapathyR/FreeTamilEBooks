@@ -10,15 +10,11 @@ import androidx.multidex.MultiDex
 import com.crashlytics.android.Crashlytics
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
-import com.jskaleel.fte.database.AppDatabase
 import com.jskaleel.fte.utils.AppPreference
 import com.jskaleel.fte.utils.AppPreference.get
 import com.jskaleel.fte.utils.Constants
 import com.jskaleel.fte.utils.NetworkSchedulerService
 import io.fabric.sdk.android.Fabric
-import io.github.inflationx.calligraphy3.CalligraphyConfig
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor
-import io.github.inflationx.viewpump.ViewPump
 import org.geometerplus.android.fbreader.FBReaderApplication
 import org.geometerplus.android.fbreader.util.FBReaderConfig
 import java.util.*
@@ -26,26 +22,10 @@ import java.util.*
 class FTEApp : FBReaderApplication() {
     override fun onCreate() {
         super.onCreate()
-        Fabric.with(this, Crashlytics())
         FirebaseApp.initializeApp(this)
-
         MultiDex.install(this@FTEApp)
-        ViewPump.init(
-            ViewPump.builder()
-                .addInterceptor(
-                    CalligraphyInterceptor(
-                        CalligraphyConfig.Builder()
-                            .setDefaultFontPath("fonts/tamil_bharathi.ttf")
-                            .build()
-                    )
-                )
-                .build()
-        )
-
-        scheduleJob()
-        AppDatabase.getAppDatabase(this@FTEApp)
-
         FBReaderConfig.init(this)
+
         initNotificationChannel()
 
         val isSubscribed =
@@ -56,6 +36,8 @@ class FTEApp : FBReaderApplication() {
         } else {
             FirebaseMessaging.getInstance().unsubscribeFromTopic(Constants.CHANNEL_NAME)
         }
+
+        scheduleJob()
     }
 
     private fun scheduleJob() {
@@ -75,7 +57,8 @@ class FTEApp : FBReaderApplication() {
     private fun initNotificationChannel() {
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
             val notificationChannels = ArrayList<NotificationChannel>()
 

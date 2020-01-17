@@ -21,10 +21,10 @@ android {
         applicationId "com.jskaleel.fte"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 33
-        versionName "6.1"
+        versionCode 34
+        versionName "7.0"
+
         multiDexEnabled true
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndk.abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'
     }
     buildTypes {
@@ -44,40 +44,33 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0-rc01'
-    implementation 'com.google.android.material:material:1.2.0-alpha03'
+    implementation project(':reader')
 
-    implementation("com.github.bumptech.glide:glide:$glide_version") {
-        exclude group: "com.android.support"
-    }
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompat"
+    implementation "androidx.core:core-ktx:$rootProject.core"
+    implementation "com.google.android.material:material:$rootProject.material"
 
     //Retrofit for REST
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.rxAdapter"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.gSonConverter"
 
-    implementation "io.reactivex.rxjava2:rxandroid:$rx_version"
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.11'
-
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_comp_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroid"
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJava"
 
     implementation "androidx.navigation:navigation-fragment:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-    implementation 'androidx.multidex:multidex:2.0.1'
-    implementation project(':reader')
+    implementation "androidx.multidex:multidex:$rootProject.multidex"
 
-    implementation 'com.google.firebase:firebase-core:17.2.1'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-
-    implementation 'io.github.inflationx:calligraphy3:3.1.1'
-    implementation 'io.github.inflationx:viewpump:1.0.0'
-    implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
+    implementation "com.google.firebase:firebase-core:$rootProject.firebaseCore"
+    implementation "com.google.firebase:firebase-analytics:$rootProject.firebaseAnalytics"
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
     implementation 'com.google.firebase:firebase-perf:19.0.4'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
+    implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
+    implementation "io.coil-kt:coil:$rootProject.coil"
 }
 
 repositories {
