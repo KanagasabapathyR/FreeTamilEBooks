@@ -10,9 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jskaleel.fte.R
-import com.jskaleel.fte.database.AppDatabase
-import com.jskaleel.fte.database.entities.LocalBooks
 import com.jskaleel.fte.model.DownloadCompleted
+import com.jskaleel.fte.model.LocalBooks
 import com.jskaleel.fte.model.NewBookAdded
 import com.jskaleel.fte.model.ScrollList
 import com.jskaleel.fte.ui.base.BookClickListener
@@ -29,14 +28,14 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : Fragment(), BookClickListener {
 
     private var downloadsPositions = LongSparseArray<Long>()
-    private lateinit var appDataBase: AppDatabase
+//    private lateinit var appDataBase: AppDatabase
     override fun bookRemoveClickListener(adapterPosition: Int, book: LocalBooks) {
         val newBook = DownloadUtil.removeDownload(mContext, book)
         adapter.updateItemStatus(adapterPosition, newBook)
     }
 
     override fun bookItemClickListener(adapterPosition: Int, book: LocalBooks) {
-        if (book.isDownloaded) {
+        /*if (book.isDownloaded) {
             DownloadUtil.openSavedBook(mContext, book)
         } else {
             if (book.downloadId == -1L) {
@@ -46,7 +45,7 @@ class HomeFragment : Fragment(), BookClickListener {
                     downloadsPositions.put(downloadID, adapterPosition.toLong())
                 }
             }
-        }
+        }*/
     }
 
     private lateinit var adapter: BookListAdapter
@@ -55,7 +54,7 @@ class HomeFragment : Fragment(), BookClickListener {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         this.mContext = context
-        this.appDataBase = AppDatabase.getAppDatabase(mContext)
+//        this.appDataBase = AppDatabase.getAppDatabase(mContext)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -65,16 +64,16 @@ class HomeFragment : Fragment(), BookClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val booksList = appDataBase.localBooksDao().getAllLocalBooksByOrder()
+//        val booksList = appDataBase.localBooksDao().getAllLocalBooksByOrder()
         val isCategoryModified =
             AppPreference.customPrefs(mContext)[Constants.SharedPreference.IS_CATEGORY_MODIFIED, false]
         if (!isCategoryModified) {
             AppPreference.customPrefs(mContext)[Constants.SharedPreference.IS_CATEGORY_MODIFIED] = true
-            CommonAppData.updateBooksCategory(mContext)
+//            CommonAppData.updateBooksCategory(mContext)
         }
         rvBookList.setHasFixedSize(true)
 
-        adapter = BookListAdapter(mContext, this@HomeFragment, booksList as MutableList<LocalBooks>, 1)
+//        adapter = BookListAdapter(mContext, this@HomeFragment, booksList as MutableList<LocalBooks>, 1)
         val layoutManger = GridLayoutManager(mContext, 2, RecyclerView.VERTICAL, false)
 //        val layoutManger = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
         rvBookList.layoutManager = layoutManger
@@ -91,14 +90,14 @@ class HomeFragment : Fragment(), BookClickListener {
                 }
                 is DownloadCompleted -> {
                     if (isAdded) {
-                        val downloadedBook = appDataBase.localBooksDao().getDownloadedBook(it.downloadId)
-                        adapter.updateItemStatus(downloadsPositions.get(it.downloadId).toInt(), downloadedBook)
+//                        val downloadedBook = appDataBase.localBooksDao().getDownloadedBook(it.downloadId)
+//                        adapter.updateItemStatus(downloadsPositions.get(it.downloadId).toInt(), downloadedBook)
                     }
                 }
                 is NewBookAdded -> {
                     if (it.isBookAdded) {
-                        val newBookList = appDataBase.localBooksDao().getAllLocalBooksByOrder()
-                        adapter.loadBooks(newBookList)
+//                        val newBookList = appDataBase.localBooksDao().getAllLocalBooksByOrder()
+//                        adapter.loadBooks(newBookList)
                     }
                 }
             }

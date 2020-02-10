@@ -45,11 +45,11 @@ class CategoryAuthorsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val nameList = if (viewType == 1) {
+        val nameList: MutableList<String> = mutableListOf() /*if (viewType == 1) {
             CommonAppData.getCategoryListWithCount(mContext)
         } else {
             CommonAppData.getAuthorsListWithCount(mContext)
-        }
+        }*/
 
         toolBar.setTitle(
             if (viewType == 1) {

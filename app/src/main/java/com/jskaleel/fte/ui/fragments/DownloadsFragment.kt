@@ -9,12 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.jskaleel.fte.R
-import com.jskaleel.fte.database.AppDatabase
-import com.jskaleel.fte.database.dao.LocalBooksDao
-import com.jskaleel.fte.database.entities.LocalBooks
 import com.jskaleel.fte.model.DownloadCompleted
+import com.jskaleel.fte.model.LocalBooks
 import com.jskaleel.fte.ui.base.BookClickListener
 import com.jskaleel.fte.ui.base.BookListAdapter
 import com.jskaleel.fte.utils.DeviceUtils
@@ -38,12 +35,10 @@ class DownloadsFragment : Fragment(), BookClickListener {
 
     private lateinit var adapter: BookListAdapter
     private lateinit var mContext: Context
-    private lateinit var appDataBase: LocalBooksDao
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         this.mContext = context
-        this.appDataBase = AppDatabase.getAppDatabase(mContext).localBooksDao()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -68,8 +63,8 @@ class DownloadsFragment : Fragment(), BookClickListener {
         rvDownloadList.layoutManager = layoutManger
         rvDownloadList.adapter = adapter
 
-        val downloadedList = appDataBase.getDownloadedBooks(true)
-        adapter.loadBooks(downloadedList)
+//        val downloadedList = appDataBase.getDownloadedBooks(true)
+//        adapter.loadBooks(downloadedList)
 
         rvDownloadList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -92,8 +87,8 @@ class DownloadsFragment : Fragment(), BookClickListener {
             when (it) {
                 is DownloadCompleted -> {
                     if (isAdded) {
-                        val downloadedBook = appDataBase.getDownloadedBook(it.downloadId)
-                        adapter.addNewItem(downloadedBook)
+//                        val downloadedBook = appDataBase.getDownloadedBook(it.downloadId)
+//                        adapter.addNewItem(downloadedBook)
                     }
                 }
             }

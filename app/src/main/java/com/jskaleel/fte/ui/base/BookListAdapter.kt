@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.jskaleel.fte.R
 import com.jskaleel.fte.model.LocalBooks
 
@@ -18,9 +17,11 @@ class BookListAdapter(
     private var previousClickedPosition: Int = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.book_list_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.book_list_item, parent, false)
         val lp = view.layoutParams as GridLayoutManager.LayoutParams
-        lp.height = if (type == 1) parent.measuredHeight / 3 else (parent.measuredHeight / 2.5).toInt()
+        lp.height =
+            if (type == 1) parent.measuredHeight / 3 else (parent.measuredHeight / 2.5).toInt()
         view.layoutParams = lp
         return BookViewHolder(mContext, view, listener)
     }
@@ -58,14 +59,14 @@ class BookListAdapter(
     }
 
     fun updateItemStatus(itemPosition: Int, downloadedBook: LocalBooks) {
-        booksList[itemPosition].savedPath = downloadedBook.savedPath
+        /*booksList[itemPosition].savedPath = downloadedBook.savedPath
         booksList[itemPosition].isDownloaded = downloadedBook.isDownloaded
-        booksList[itemPosition].downloadId = downloadedBook.downloadId
+        booksList[itemPosition].downloadId = downloadedBook.downloadId*/
         notifyItemChanged(itemPosition)
     }
 
     fun updateDownloadId(itemPosition: Int, downloadID: Long) {
-        booksList[itemPosition].downloadId = downloadID
+//        booksList[itemPosition].downloadId = downloadID
         notifyItemChanged(itemPosition)
     }
 

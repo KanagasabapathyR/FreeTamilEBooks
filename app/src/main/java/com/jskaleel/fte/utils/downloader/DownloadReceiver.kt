@@ -4,7 +4,6 @@ import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.jskaleel.fte.database.AppDatabase
 import com.jskaleel.fte.model.CheckForDownloadsMenu
 import com.jskaleel.fte.model.DownloadCompleted
 import com.jskaleel.fte.utils.PrintLog
@@ -18,13 +17,13 @@ class DownloadReceiver : BroadcastReceiver() {
         if (id !in DownloadManagerHelper.getDownloads(context)) {
             return
         }
-        val localBooksDao = AppDatabase.getAppDatabase(context.applicationContext).localBooksDao()
-        val file = DownloadManagerHelper.getDownloadedFile(context, id)
-        if (file.isSuccessful()) {
-            localBooksDao.updateStatus(true, id)
-            val newBook = localBooksDao.getDownloadedBook(id)
-            RxBus.publish(DownloadCompleted(id))
-            RxBus.publish(CheckForDownloadsMenu(newBook.bookid))
-        }
+//        val localBooksDao = AppDatabase.getAppDatabase(context.applicationContext).localBooksDao()
+//        val file = DownloadManagerHelper.getDownloadedFile(context, id)
+//        if (file.isSuccessful()) {
+//            localBooksDao.updateStatus(true, id)
+//            val newBook = localBooksDao.getDownloadedBook(id)
+//            RxBus.publish(DownloadCompleted(id))
+//            RxBus.publish(CheckForDownloadsMenu(newBook.bookid))
+//        }
     }
 }

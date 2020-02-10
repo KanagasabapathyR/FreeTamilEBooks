@@ -1,6 +1,5 @@
 package com.jskaleel.fte.utils
 
-import com.jskaleel.fte.database.entities.LocalBooks
 import com.jskaleel.fte.model.BooksResponse
 import io.reactivex.Observable
 import okhttp3.ResponseBody

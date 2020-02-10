@@ -36,7 +36,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(bottomAppBar)
-        disposable = CommonAppData.updateBooksFromApi(this@MainActivity)
+//        disposable = CommonAppData.updateBooksFromApi(this@MainActivity)
         subscribeBus()
 
         bottomNavDrawerFragment = BottomNavigationDrawerFragment()

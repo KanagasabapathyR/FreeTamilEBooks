@@ -13,10 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.jskaleel.fte.R
-import com.jskaleel.fte.database.AppDatabase
-import com.jskaleel.fte.database.entities.LocalBooks
+import com.jskaleel.fte.model.LocalBooks
 import com.jskaleel.fte.ui.base.BookClickListener
 import com.jskaleel.fte.ui.base.BookListAdapter
 import com.jskaleel.fte.utils.DeviceUtils
@@ -32,7 +30,7 @@ class SearchFragment : Fragment(), BookClickListener {
     }
 
     override fun bookItemClickListener(adapterPosition: Int, book: LocalBooks) {
-        if (book.isDownloaded) {
+        /*if (book.isDownloaded) {
             DownloadUtil.openSavedBook(mContext, book)
         } else {
             if (book.downloadId == -1L) {
@@ -41,7 +39,7 @@ class SearchFragment : Fragment(), BookClickListener {
                     adapter.updateDownloadId(adapterPosition, downloadID)
                 }
             }
-        }
+        }*/
     }
 
     private lateinit var adapter: BookListAdapter
@@ -71,7 +69,7 @@ class SearchFragment : Fragment(), BookClickListener {
         rvBookList.layoutManager = layoutManger
         rvBookList.adapter = adapter
 
-        val appDataBase = AppDatabase.getAppDatabase(mContext)
+//        val appDataBase = AppDatabase.getAppDatabase(mContext)
         searchHandler = @SuppressLint("HandlerLeak")
         object : Handler() {
             override fun handleMessage(msg: Message?) {
@@ -79,7 +77,7 @@ class SearchFragment : Fragment(), BookClickListener {
                     if (msg.what == triggerNewService && edtSearch != null && isAdded) {
                         val query = edtSearch.text.toString()
                         when (filterType) {
-                            1 -> {
+                            /*1 -> {
                                 val books = appDataBase.localBooksDao().getBooksByTitle("%$query%")
                                 PrintLog.info("Books by Title $books")
                                 loadBooks(books)
@@ -88,7 +86,7 @@ class SearchFragment : Fragment(), BookClickListener {
                                 val books = appDataBase.localBooksDao().getBooksByAuthor("%$query%")
                                 PrintLog.info("Books by Author $books")
                                 loadBooks(books)
-                            }
+                            }*/
                         }
                     }
                 }
@@ -152,7 +150,7 @@ class SearchFragment : Fragment(), BookClickListener {
 
         edtSearch.doAfterTextChanged { edt ->
             if (edt != null) {
-                val query = edt.toString().trim()
+                /*val query = edt.toString().trim()
                 if (query.isNotBlank() && query.isNotEmpty()) {
                     if (query.length > 3) {
                         PrintLog.info("Text ${edt.toString()}")
@@ -167,7 +165,7 @@ class SearchFragment : Fragment(), BookClickListener {
                     edtSearch.tag = "FILTER"
                     searchHandler.removeMessages(triggerNewService)
                     adapter.clearBooks()
-                }
+                }*/
             }
         }
     }

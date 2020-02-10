@@ -4,9 +4,8 @@ import android.app.DownloadManager
 import android.content.Context
 import android.net.Uri
 import com.jskaleel.fte.R
-import com.jskaleel.fte.database.AppDatabase
-import com.jskaleel.fte.database.entities.LocalBooks
 import com.jskaleel.fte.model.CheckForDownloadsMenu
+import com.jskaleel.fte.model.LocalBooks
 import com.jskaleel.fte.utils.PrintLog
 import com.jskaleel.fte.utils.RxBus
 import org.geometerplus.android.fbreader.FBReader
@@ -16,7 +15,7 @@ object DownloadUtil {
 
     fun queueForDownload(context: Context, book: LocalBooks): Long {
         try {
-            val localBooksDao = AppDatabase.getAppDatabase(context).localBooksDao()
+//            val localBooksDao = AppDatabase.getAppDatabase(context).localBooksDao()
 
             val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             val url = book.epub
@@ -35,7 +34,7 @@ object DownloadUtil {
 
             DownloadManagerHelper.saveDownload(context, id)
 
-            localBooksDao.updateDownloadDetails("$extStorageDirectory/${book.bookid}.epub", id, book.bookid)
+//            localBooksDao.updateDownloadDetails("$extStorageDirectory/${book.bookid}.epub", id, book.bookid)
             return id
         } catch (e: Exception) {
             return 0L
@@ -43,17 +42,18 @@ object DownloadUtil {
     }
 
     fun openSavedBook(context: Context, book: LocalBooks) {
-        PrintLog.info("savedPath ${book.savedPath}")
-        FBReader.openBookActivity(context, book.savedPath)
+//        PrintLog.info("savedPath ${book.savedPath}")
+//        FBReader.openBookActivity(context, book.savedPath)
     }
 
     fun removeDownload(context: Context, book: LocalBooks): LocalBooks {
-        val localBooksDao = AppDatabase.getAppDatabase(context).localBooksDao()
-        val filePath = File(book.savedPath)
-        filePath.delete()
-        localBooksDao.updateStatusByBookId(false, -1L, "", book.bookid)
-        PreferencesHelper.removeDownload(context, book.downloadId)
-        RxBus.publish(CheckForDownloadsMenu(book.bookid))
-        return localBooksDao.getBookByBookId(book.bookid)
+//        val localBooksDao = AppDatabase.getAppDatabase(context).localBooksDao()
+//        val filePath = File(book.savedPath)
+//        filePath.delete()
+//        localBooksDao.updateStatusByBookId(false, -1L, "", book.bookid)
+//        PreferencesHelper.removeDownload(context, book.downloadId)
+//        RxBus.publish(CheckForDownloadsMenu(book.bookid))
+//        return localBooksDao.getBookByBookId(book.bookid)
+        return LocalBooks()
     }
 }
