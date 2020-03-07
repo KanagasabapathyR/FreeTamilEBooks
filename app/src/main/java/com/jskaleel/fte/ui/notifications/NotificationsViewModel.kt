@@ -1,13 +1,13 @@
-package com.jskaleel.fte.ui.tools
+package com.jskaleel.fte.ui.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ToolsViewModel : ViewModel() {
+class NotificationsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is tools Fragment"
+        value = "This is notifications Fragment"
     }
     val text: LiveData<String> = _text
 }

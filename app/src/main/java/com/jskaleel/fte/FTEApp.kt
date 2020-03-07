@@ -10,15 +10,12 @@ import androidx.multidex.MultiDex
 import com.jskaleel.fte.utils.Constants
 import com.jskaleel.fte.utils.NetworkSchedulerService
 import org.geometerplus.android.fbreader.FBReaderApplication
-import org.geometerplus.android.fbreader.util.FBReaderConfig
 import java.util.*
 
 class FTEApp : FBReaderApplication() {
     override fun onCreate() {
         super.onCreate()
         MultiDex.install(this@FTEApp)
-        FBReaderConfig.init(this)
-
         initNotificationChannel()
 
         scheduleJob()

@@ -7,6 +7,7 @@ import android.os.Message
 import android.view.View
 import android.view.animation.*
 import androidx.appcompat.app.AppCompatActivity
+import com.jskaleel.fte.MainActivity
 import com.jskaleel.fte.R
 import kotlinx.android.synthetic.main.activity_splash.*
 import java.lang.ref.WeakReference

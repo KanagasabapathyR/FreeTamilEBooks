@@ -6,7 +6,6 @@ import android.app.job.JobService
 import android.content.Intent
 import android.content.IntentFilter
 import com.jskaleel.fte.R
-import com.jskaleel.fte.model.NetWorkMessage
 import com.jskaleel.fte.utils.network.ConnectivityReceiver
 import com.jskaleel.fte.utils.network.ConnectivityReceiverListener
 
@@ -39,6 +38,6 @@ class NetworkSchedulerService : JobService(), ConnectivityReceiverListener {
 
     override fun onNetworkConnectionChanged(isConnected: Boolean) {
         val message = if (isConnected) getString(R.string.connected_to_internet) else getString(R.string.no_internet)
-        RxBus.publish(NetWorkMessage(message))
+//        RxBus.publish(NetWorkMessage(message))
     }
 }
