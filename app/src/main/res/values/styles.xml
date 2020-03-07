@@ -24,14 +24,12 @@
         <item name="android:windowBackground">@drawable/splash_window_bg</item>
     </style>
 
-    <style name="AppBottomSheetDialogTheme"
-           parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
         <item name="colorControlHighlight">@color/colorAccent_alpha_40</item>
     </style>
 
-    <style name="AppModalStyle"
-           parent="Widget.Design.BottomSheet.Modal">
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/rounded_corner_bottom_sheet</item>
     </style>
 
@@ -55,5 +53,14 @@
     <style name="FTE.Title.TextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

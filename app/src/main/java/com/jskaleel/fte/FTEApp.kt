@@ -7,14 +7,8 @@ import android.app.job.JobScheduler
 import android.content.ComponentName
 import android.content.Context
 import androidx.multidex.MultiDex
-import com.crashlytics.android.Crashlytics
-import com.google.firebase.FirebaseApp
-import com.google.firebase.messaging.FirebaseMessaging
-import com.jskaleel.fte.utils.AppPreference
-import com.jskaleel.fte.utils.AppPreference.get
 import com.jskaleel.fte.utils.Constants
 import com.jskaleel.fte.utils.NetworkSchedulerService
-import io.fabric.sdk.android.Fabric
 import org.geometerplus.android.fbreader.FBReaderApplication
 import org.geometerplus.android.fbreader.util.FBReaderConfig
 import java.util.*
@@ -22,20 +16,10 @@ import java.util.*
 class FTEApp : FBReaderApplication() {
     override fun onCreate() {
         super.onCreate()
-        FirebaseApp.initializeApp(this)
         MultiDex.install(this@FTEApp)
         FBReaderConfig.init(this)
 
         initNotificationChannel()
-
-        val isSubscribed =
-            AppPreference.customPrefs(applicationContext)[Constants.SharedPreference.NEW_BOOKS_UPDATE, true]
-
-        if (isSubscribed) {
-            FirebaseMessaging.getInstance().subscribeToTopic(Constants.CHANNEL_NAME)
-        } else {
-            FirebaseMessaging.getInstance().unsubscribeFromTopic(Constants.CHANNEL_NAME)
-        }
 
         scheduleJob()
     }

@@ -6,12 +6,12 @@ import android.os.Handler
 import android.os.Message
 import android.view.View
 import android.view.animation.*
+import androidx.appcompat.app.AppCompatActivity
 import com.jskaleel.fte.R
-import com.jskaleel.fte.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 import java.lang.ref.WeakReference
 
-class SplashActivity : BaseActivity() {
+class SplashActivity : AppCompatActivity() {
     private val sleepDuration: Long = 2000
     private var activityDestroyed = false
 

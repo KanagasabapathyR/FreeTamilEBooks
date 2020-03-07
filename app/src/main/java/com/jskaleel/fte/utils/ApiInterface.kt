@@ -3,10 +3,9 @@ package com.jskaleel.fte.utils
 import com.jskaleel.fte.model.BooksResponse
 import io.reactivex.Observable
 import okhttp3.ResponseBody
-import retrofit2.http.*
 
 interface ApiInterface {
-    @FormUrlEncoded
+    /*@FormUrlEncoded
     @POST("e/1FAIpQLSc_BbE7RfJdUCEgzwGSeiaiUe3ugBdITgJIZY71ED93puqQ3g/formResponse")
     fun postFeedBack(
         @Header("accept") type: String,
@@ -16,5 +15,5 @@ interface ApiInterface {
     ): Observable<ResponseBody>
 
     @GET("master/booksdb.json")
-    fun getNewBooks(): Observable<BooksResponse>
+    fun getNewBooks(): Observable<BooksResponse>*/
 }

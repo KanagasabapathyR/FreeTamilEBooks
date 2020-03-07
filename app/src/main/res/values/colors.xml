@@ -16,4 +16,5 @@
 
     <color name="menuTintColor">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="ic_launcher_background">#FFEB3B</color>
 </resources>
