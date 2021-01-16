@@ -30,11 +30,11 @@ class FTEApp : MultiDexApplication(), ImageLoaderFactory {
         super.onCreate()
         FirebaseApp.initializeApp(this)
 
-//        startKoin {
-//            androidLogger()
-//            modules(listOf(networkModule, fteModule))
-//            androidContext(this@FTEApp)
-//        }
+        startKoin {
+            androidLogger()
+            modules(listOf(networkModule, fteModule))
+            androidContext(this@FTEApp)
+        }
 
         createFolder()
 
