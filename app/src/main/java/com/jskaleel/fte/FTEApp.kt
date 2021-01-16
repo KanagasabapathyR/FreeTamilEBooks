@@ -16,6 +16,7 @@ import com.jskaleel.fte.utils.AppPreference
 import com.jskaleel.fte.utils.AppPreference.get
 import com.jskaleel.fte.utils.Constants
 import com.jskaleel.fte.utils.FileUtils
+import dagger.hilt.android.HiltAndroidApp
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -23,17 +24,17 @@ import org.koin.core.context.startKoin
 import java.io.File
 import java.util.*
 
-
+@HiltAndroidApp
 class FTEApp : MultiDexApplication(), ImageLoaderFactory {
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
 
-        startKoin {
-            androidLogger()
-            modules(listOf(networkModule, fteModule))
-            androidContext(this@FTEApp)
-        }
+//        startKoin {
+//            androidLogger()
+//            modules(listOf(networkModule, fteModule))
+//            androidContext(this@FTEApp)
+//        }
 
         createFolder()
 

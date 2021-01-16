@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.jskaleel.fte.R
 import com.jskaleel.fte.databinding.ActivityMainLandingBinding
+import dagger.hilt.android.AndroidEntryPoint
 import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
 
+@AndroidEntryPoint
 class MainLandingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainLandingBinding
