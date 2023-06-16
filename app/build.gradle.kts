@@ -102,12 +102,6 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    //==================== Deserializer ====================//
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
-    implementation("com.squareup.moshi:moshi:1.14.0")
-    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
-    implementation("com.squareup.moshi:moshi-adapters:1.14.0")
-
     //==================== Database ====================//
     implementation("androidx.room:room-runtime:2.5.1")
     kapt("androidx.room:room-compiler:2.5.1")
