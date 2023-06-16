@@ -1,0 +1,17 @@
+[versions]
+agp = "8.0.2"
+kotlin = "1.8.10"
+hilt = "2.44.2"
+google-services = "4.3.15"
+
+[libraries]
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+gmsGoogleService = { id = "com.google.gms.google-services", version.ref = "google-services" }
+
+[bundles]
+
