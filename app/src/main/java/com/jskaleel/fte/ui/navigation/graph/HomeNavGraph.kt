@@ -1,13 +1,13 @@
 package com.jskaleel.fte.ui.navigation.graph
 
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.jskaleel.fte.ui.navigation.Route
 import com.jskaleel.fte.ui.navigation.Screen
+import com.jskaleel.fte.ui.screens.home.HomeScreenRoute
 
 fun NavGraphBuilder.homeNavGraph(
     navController: NavController,
@@ -17,7 +17,10 @@ fun NavGraphBuilder.homeNavGraph(
         route = Route.Home.name
     ) {
         composable(route = Screen.Home.route) {
-            Text(text = "Home Screen", style = MaterialTheme.typography.headlineSmall)
+            HomeScreenRoute(
+                openBook = {},
+                viewModel = hiltViewModel()
+            )
         }
     }
 }

@@ -3,12 +3,14 @@ package com.jskaleel.fte.data.source.datastore
 import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.jskaleel.fte.core.extensions.defaultThemeConfig
 import com.jskaleel.fte.core.model.ThemeConfig
 import com.jskaleel.fte.data.model.UserThemeData
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -52,9 +54,21 @@ class AppPreferenceStore @Inject constructor(@ApplicationContext private val con
         }
     }
 
+    suspend fun setLastSync() {
+        context.dataStore.edit { preference ->
+            preference[KEY_LAST_SYNC] = System.currentTimeMillis()
+        }
+    }
+
+    suspend fun getLastSync(): Long {
+        val preference = context.dataStore.data.firstOrNull()
+        return preference?.get(KEY_LAST_SYNC) ?: 0
+    }
+
     companion object {
         private const val PREF_NAME = "fte_preferences"
         private val KEY_THEME_CONFIG = intPreferencesKey("key.theme_config")
+        private val KEY_LAST_SYNC = longPreferencesKey("key.last_sync")
     }
 }
 

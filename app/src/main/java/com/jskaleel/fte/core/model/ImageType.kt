@@ -31,7 +31,7 @@ fun ImageType.toTypeString(): String {
     }
 }
 
-fun String.toImageType(): ImageType {
+fun String.toImage(): ImageType {
     return if (this.startsWith("Drawable:")) {
         ImageType.ResourceImage(this.replace("Drawable:", "").toInt())
     } else {

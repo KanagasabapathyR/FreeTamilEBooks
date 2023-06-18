@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val mainActivityUseCase: MainActivityUseCase
+    private val mainActivityUseCase: MainActivityUseCase,
 ) : ViewModel() {
 
     private val viewModelState = MutableStateFlow(MainActivityViewModelState())
@@ -28,8 +28,8 @@ class MainActivityViewModel @Inject constructor(
         )
 
     init {
-        getUserConfig()
         subscribeNetworkMonitor()
+        getUserConfig()
     }
 
     private fun getUserConfig() {
