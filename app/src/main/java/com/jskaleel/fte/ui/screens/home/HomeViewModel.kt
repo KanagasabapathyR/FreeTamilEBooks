@@ -2,6 +2,9 @@ package com.jskaleel.fte.ui.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.epubreader.android.EPubReader
+import com.epubreader.android.utils.onFailure
+import com.epubreader.android.utils.onSuccess
 import com.jskaleel.fte.R
 import com.jskaleel.fte.core.model.ImageType
 import com.jskaleel.fte.domain.model.EBook
@@ -14,6 +17,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -44,6 +48,18 @@ class HomeViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun downloadBook(index: Int) {
+        viewModelScope.launch {
+            val item = viewModelState.value.books[index]
+            EPubReader.getReader().download(item.epub)
+                .onSuccess {
+                    Timber.tag("Khaleel").d("onSuccess: $it")
+                }.onFailure {
+                    Timber.tag("Khaleel").d("onFailure: $it")
+                }
         }
     }
 }

@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "TamilEBooks"
 include(":app")
+include(":epubreader")

@@ -21,7 +21,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import com.jskaleel.fte.R
 import com.jskaleel.fte.core.model.ImageType
 import com.jskaleel.fte.core.model.getImagePainter
+import com.jskaleel.fte.core.utils.CallBack
 import com.jskaleel.fte.ui.components.AppBarWithSearch
 import com.jskaleel.fte.ui.components.FteCard
 import com.jskaleel.fte.ui.extensions.applyPlaceHolder
@@ -51,6 +52,7 @@ import com.jskaleel.fte.ui.theme.dimension
 @Composable
 fun HomeScreen(
     loading: Boolean,
+    onDownloadClick: (Int) -> Unit,
     books: List<BooksUiModel>,
 ) {
     AppBarWithSearch {
@@ -65,6 +67,7 @@ fun HomeScreen(
                 when (state) {
                     true -> BookListLoaderContent()
                     false -> BookListContent(
+                        onDownloadClick = onDownloadClick,
                         books = books
                     )
                 }
@@ -74,7 +77,10 @@ fun HomeScreen(
 }
 
 @Composable
-fun BookListContent(books: List<BooksUiModel>) {
+fun BookListContent(
+    onDownloadClick: (Int) -> Unit,
+    books: List<BooksUiModel>
+) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.medium),
         contentPadding = PaddingValues(vertical = MaterialTheme.dimension.medium),
@@ -82,8 +88,9 @@ fun BookListContent(books: List<BooksUiModel>) {
             .clipToBounds()
             .padding(horizontal = MaterialTheme.dimension.medium)
     ) {
-        items(books) { book ->
+        itemsIndexed(books) { index, book ->
             BookItem(
+                onDownloadClick = { onDownloadClick(index) },
                 image = book.image,
                 title = book.title,
                 author = book.author,
@@ -186,6 +193,7 @@ private fun BookListLoaderContent() {
 
 @Composable
 fun BookItem(
+    onDownloadClick: CallBack,
     title: String,
     author: String,
     category: String,
@@ -209,7 +217,8 @@ fun BookItem(
                     .aspectRatio(ratio = 0.75f)
                     .clip(
                         shape = RoundedCornerShape(12.dp)
-                    ).clipToBounds(),
+                    )
+                    .clipToBounds(),
                 contentScale = ContentScale.Crop
             )
 
@@ -251,7 +260,7 @@ fun BookItem(
                     Spacer(modifier = Modifier.weight(1f))
 
                     IconButton(
-                        onClick = {}
+                        onClick = onDownloadClick
                     ) {
                         Icon(
                             painter = downloadIcon.getImagePainter(),
@@ -274,9 +283,9 @@ fun CategoryText(
         modifier = modifier.then(
             Modifier
                 .background(
-                    color = color, CircleShape
+                    color = color.copy(alpha = 0.6f), CircleShape
                 )
-                .padding(horizontal = 12.dp, vertical = 4.dp)
+                .padding(horizontal = 12.dp, vertical = 6.dp)
         ),
         contentAlignment = Alignment.Center
     ) {
@@ -293,6 +302,7 @@ fun CategoryText(
 private fun BookItemPreview() {
     FteTheme {
         BookItem(
+            onDownloadClick = { },
             image = ImageType.EMPTY,
             title = "Book Item Preview",
             author = "Author",

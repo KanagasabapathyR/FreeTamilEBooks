@@ -13,6 +13,7 @@ fun HomeScreenRoute(
 
     HomeScreen(
         loading = uiState.loading,
+        onDownloadClick = viewModel::downloadBook,
         books = uiState.books
     )
 }

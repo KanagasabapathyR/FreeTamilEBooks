@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
+import timber.log.Timber
 import javax.inject.Inject
 import javax.net.ssl.HttpsURLConnection
 
@@ -24,13 +25,15 @@ class BooksRepositoryImpl @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun getBooks(): Flow<List<ELocalBooks>> {
-        val lastSync = runBlocking { appPreferenceStore.getLastSync() }.lastSyncBefore()
+        var lastSync = runBlocking { appPreferenceStore.getLastSync() }.lastSyncBefore()
         return localBooks
             .getBooks()
             .distinctUntilChanged()
             .flatMapLatest { books ->
+                Timber.tag("Khaleel").d("getBooks books: ${books.size} lastSync : $lastSync")
                 return@flatMapLatest if (books.isEmpty() || lastSync == -1L || lastSync > 1) {
                     refreshBooks()
+                    lastSync = appPreferenceStore.getLastSync()
                     flowOf(emptyList())
                 } else {
                     flowOf(books)

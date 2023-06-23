@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import coil.compose.rememberAsyncImagePainter
-import com.bankworkersunity.android.core.extensions.emptyString
+import com.jskaleel.fte.core.extensions.emptyString
 
 sealed class ImageType {
     data class ResourceImage(@DrawableRes val id: Int) : ImageType()
