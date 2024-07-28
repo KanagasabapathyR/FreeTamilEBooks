@@ -9,9 +9,6 @@ plugins {
     id("com.google.firebase.crashlytics")
 }
 
-val properties = Properties()
-properties.load(project.rootProject.file("local.properties").reader())
-
 android {
     namespace = "com.jskaleel.fte"
     compileSdk = 33
@@ -27,7 +24,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        buildConfigField("String", "BASE_URL", properties.getProperty("BASE_URL"))
+        buildConfigField("String", "BASE_URL", providers.gradleProperty("BASE_URL").get())
     }
 
     buildTypes {
@@ -114,7 +111,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.2.2")
 
     //==================== Firebase ====================//
-    implementation (platform("com.google.firebase:firebase-bom:31.5.0"))
+    implementation(platform("com.google.firebase:firebase-bom:31.5.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx")
